@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class InClass extends StatelessWidget {
   const InClass({Key? key}) : super(key: key);
@@ -57,25 +58,24 @@ class InClass extends StatelessWidget {
               myWidget(
                 text: 'LinkedIn',
                 color: const Color.fromRGBO(243, 242, 255, 1),
-                icon: Icons.link,
+                icon: const FaIcon(FontAwesomeIcons.linkedin),
               ),
               myWidget(
                 text: 'facebook',
                 color: const Color.fromRGBO(199, 228, 255, 1),
-                icon: Icons.facebook,
+                icon: const FaIcon(FontAwesomeIcons.facebook),
               ),
               myWidget(
                 text: 'Instagram',
                 color: const Color.fromRGBO(255, 242, 242, 1),
-                icon: Icons.link,
+                icon: const FaIcon(FontAwesomeIcons.instagram),
               ),
               myWidget(
-                text: 'MyWebsite',
-                color: const Color.fromRGBO(255, 251, 242, 1),
-                icon: Icons.link,
-              ),
+                  text: 'MyWebsite',
+                  color: const Color.fromRGBO(255, 251, 242, 1),
+                  icon: const FaIcon(FontAwesomeIcons.firefoxBrowser)),
               Padding(
-                padding: const EdgeInsets.symmetric(vertical: 14.0),
+                padding: const EdgeInsets.symmetric(vertical: .0),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
@@ -93,7 +93,7 @@ class InClass extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
@@ -102,13 +102,20 @@ class InClass extends StatelessWidget {
   }
 
   Widget myWidget(
-      {required String text, required Color color, required IconData icon}) {
+      {required String text, required Color color, required Widget icon}) {
     return Padding(
       padding: const EdgeInsets.only(top: 25.0),
       child: Container(
         height: 54,
         width: 299,
         decoration: BoxDecoration(
+          boxShadow: const [
+            BoxShadow(
+              color: Color.fromRGBO(0, 0, 0, 0.25),
+              blurRadius: 10,
+              offset: Offset(0, 5),
+            ),
+          ],
           color: color,
           borderRadius: const BorderRadius.all(Radius.circular(6.0)),
         ),
@@ -116,7 +123,7 @@ class InClass extends StatelessWidget {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Icon(icon),
+              child: icon,
             ),
             Padding(
               padding: const EdgeInsets.only(left: 80.0),
@@ -134,14 +141,23 @@ class InClass extends StatelessWidget {
 }
 
 Widget myContainer({required IconData icon, required Color color}) {
-  return ClipRect(
-    child: Container(
+  return Container(
+    margin: const EdgeInsets.all(20),
+    decoration: BoxDecoration(
+      borderRadius: const BorderRadius.all(Radius.circular(20)),
       color: color,
-      width: 40,
-      height: 40,
-      child: Center(
-        child: Icon(icon),
-      ),
+      boxShadow: const [
+        BoxShadow(
+          color: Color.fromRGBO(0, 0, 0, 0.25),
+          blurRadius: 10,
+          offset: Offset(0, 5),
+        ),
+      ],
+    ),
+    width: 40,
+    height: 40,
+    child: Center(
+      child: Icon(icon),
     ),
   );
 }
