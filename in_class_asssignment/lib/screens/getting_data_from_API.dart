@@ -18,16 +18,17 @@ class ApiData extends StatelessWidget {
                 return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                    final post = snapshot.data![index];
+                    final user = snapshot.data![index];
                     return SizedBox(
-                      height: 100,
-                      width: 100,
-                      child: Stack(
+                      child: Column(
                         children: [
-                          SizedBox(
-                            child: Image.network(post["url"].toString()),
-                          ),
-                          Positioned(child: Text(post['id'].toString()))
+                          Text(user['name']),
+                          Text(user['username']),
+                          Text(user['email']),
+                          Text(user['name']),
+                          Text(user['address']['street']),
+                          Text(user['id'].toString()),
+                          const SizedBox(height: 40)
                         ],
                       ),
                     );
@@ -49,16 +50,14 @@ class ApiData extends StatelessWidget {
 
   //fetch data from API
   Future<List<Map<String, dynamic>>> fetchdata() async {
-    // final uri = Uri.parse('https://jsonplaceholder.typicode.com/posts');
-    //http.Response response = await http.get(uri);
-    const String apiEndpoint = "https://jsonplaceholder.typicode.com/photos";
+    const String apiEndpoint = "https://jsonplaceholder.typicode.com/users";
     http.Response response = await http.get(Uri.parse(apiEndpoint));
 
     var decodedJson = json.decode(response.body);
 
     List<Map<String, dynamic>> listOfPosts =
         decodedJson.cast<Map<String, dynamic>>();
-    print(listOfPosts[0]["title"]);
+
     return listOfPosts;
   }
 }
