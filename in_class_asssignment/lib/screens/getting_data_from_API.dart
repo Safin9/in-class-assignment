@@ -19,9 +19,21 @@ class ApiData extends StatelessWidget {
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
                     final post = snapshot.data![index];
-                    return ListTile(
-                      title: Text(post["title"].toString()),
+                    return SizedBox(
+                      height: 100,
+                      width: 100,
+                      child: Stack(
+                        children: [
+                          SizedBox(
+                            child: Image.network(post["url"].toString()),
+                          ),
+                          Positioned(child: Text(post['id'].toString()))
+                        ],
+                      ),
                     );
+                    // ListTile(
+                    //   title: Text(post["id"].toString()),
+                    // );
                   },
                 );
               } else if (snapshot.hasError) {
@@ -39,10 +51,11 @@ class ApiData extends StatelessWidget {
   Future<List<Map<String, dynamic>>> fetchdata() async {
     // final uri = Uri.parse('https://jsonplaceholder.typicode.com/posts');
     //http.Response response = await http.get(uri);
-    const String apiEndpoint = "https://jsonplaceholder.typicode.com/posts";
+    const String apiEndpoint = "https://jsonplaceholder.typicode.com/photos";
     http.Response response = await http.get(Uri.parse(apiEndpoint));
 
     var decodedJson = json.decode(response.body);
+
     List<Map<String, dynamic>> listOfPosts =
         decodedJson.cast<Map<String, dynamic>>();
     print(listOfPosts[0]["title"]);
